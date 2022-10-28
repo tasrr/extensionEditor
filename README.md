@@ -1,5 +1,7 @@
 # extensionEditor
 
+<a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">AUTOMATIC1111</a>向けのプロンプトエディター
+
 ★インストール<br>
 <br>
 右上の Code から zipダ ウンロード<br>
