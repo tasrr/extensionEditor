@@ -429,9 +429,14 @@ function getJa( line ){
 	var ja = "";
 	var word = line.replace( /\s*\/\/.*$/, "" ); // Delete comment
 	word = word.replace( /(\`.*\`.*$)/, "" ); // Delete transtext
-	word = word.replace( /^\s*\((.*)\:\s*(\d|\.)*\s*\)/, "$1" );	// Delete weight
+	word = word.replaceAll( /\(|\)|\[|\]/g, "" );	// Delete weight
+//console.log( word );
+	word = word.replaceAll( /^\s*(.*)\s*\:\s*\d+\.*\d*/g, "$1" );	// Delete weight
+//	word = word.replace( /^\s*\((.*)\:\s*(\d|\.)*\s*\)/, "$1" );	// Delete weight
+//console.log( word );
 	word = word.replace( /,/, "" );	// Delete canma
 	word = word.trim();
+//console.log( word );
 	var word_noneunderbar = word.replaceAll( "_", " " );
 	if( word.length != 0 ){
 		
