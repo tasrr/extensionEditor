@@ -126,6 +126,9 @@ Ace エディタの便利機能<br>
 動作確認は 現状chrome のみ<br>
 <br>
 
+# Credits
+AUTOMATIC11111 - <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">https://github.com/AUTOMATIC1111/stable-diffusion-webui</a><br>
+AceEditor - <a href="https://github.com/ajaxorg/ace">https://github.com/ajaxorg/ace</a><br>
 
 
 
