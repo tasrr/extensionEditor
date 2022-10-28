@@ -1,0 +1,1621 @@
+<html>
+
+<head>
+<script src="./aceEditor/ace.js" type="text/javascript"></script>
+<script src="./aceEditor/ext-language_tools.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+<div id="allContainer" style="font-size: 80%; display: flex; flex-direction: row;">
+
+<!-- toolsContainer -->
+<div id="toolsContainer" style="width: 220px; display: flex; flex-direction: column; padding:3px; border:2px solid #333333;">
+
+	<!-- Export Tools -->
+	<div style="display: flex; flex-direction: column;"> 
+		<label data-UIlang="en"><b>Export</b></label>
+		<label data-UIlang="ja"><b>エクスポート</b></label>
+		
+		<button onclick="sendDataTo1111()" style="width: 160px; height: 30px; margin: 0px 0px 0px 0px;">
+			<label data-UIlang="en"><b>SEND TO 1111</b></label>
+			<label data-UIlang="ja"><b>1111 に送る</b></label>
+		</button>
+
+		<div style="font-size: 60%; display: flex; flex-direction: column; margin: 0px 0px 0px 0px;">
+			<div style="flex-direction: row;">
+				<input id="" type="checkbox" checked disabled>
+				<label data-UIlang="en"><b>Delete comment and `...` string</b></label>
+				<label data-UIlang="ja"><b>コメントと翻訳文字列削除</b></label>
+			</div>
+			<div style="flex-direction: row;">
+				<input id="" type="checkbox" checked disabled>
+				<label data-UIlang="en"><b>Delete only "{" or "}" line</b></label>
+				<label data-UIlang="ja"><b>"{" または "}" だけの行削除</b></label>
+			</div>
+			<div style="flex-direction: row;">
+				<input id="addCanma" type="checkbox">
+				<label data-UIlang="en"><b>Add separate ","</b></label>
+				<label data-UIlang="ja"><b>区切り文字に "," 追加</b></label>
+			</div>
+			<div style="flex-direction: row;">
+				<input id="deleteLF" type="checkbox">
+				<label data-UIlang="en"><b>Change one line.</b></label>
+				<label data-UIlang="ja"><b>１行にする</b></label>
+			</div>
+		</div>
+
+	</div> <!-- Export Tools -->
+
+	<div style="height: 0px; border:2px solid #333333; margin: 10px 0px 0px 0px;"> 
+	</div>
+
+	<!-- Import Tools -->
+	<div style="display: flex; flex-direction: column; "> 
+		<label data-UIlang="en"><b>IMPORT</b></label>
+		<label data-UIlang="ja"><b>インポート</b></label>
+
+		<button onclick="readPromptFrom1111()" style="width: 160px; height: 30px; margin: 0px 0px 0px 0px;">
+			<label data-UIlang="en"><b>READ FROM 1111</b></label>
+			<label data-UIlang="ja"><b>1111から読み込み</b></label>
+		</button>
+		
+		<label id="parsePNGInfo" style="width: 160px; height: 100px; text-align: center; border:4px dashed #333333; margin: 10px 0px 0px 0px;">
+			<label data-UIlang="en"><b>DROP PNG Image</b><br>METADATA<br>send prompt.<br>Override <br>MAIN and NEGATIVE.</label>
+			<label data-UIlang="ja"><b>ドロップ PNG 画像</b><br>メタデータ読み込み<br><b>メインとネガティブを<br>上書きする</b></label>
+		</label>
+	</div> <!-- Import Tools -->
+	
+	<div style="height: 0px; border:2px solid #333333; margin: 10px 0px 0px 0px;"> 
+	</div>
+
+	<!-- Text Tools -->
+	<div style="display: flex; flex-direction: column;"> 
+		<label data-UIlang="en"><b>TEXT TOOLS</b></label>
+		<label data-UIlang="ja"><b>テキスト編集ツール</b></label>
+
+		<button onclick="splitWord()" style="width: 160px; height: 40px; margin: 0px 0px 0px 0px;">
+			<label data-UIlang="en"><b>Split word</b></label>
+			<label data-UIlang="ja"><b>カンマで単語を行に分割</b></label>
+		</button>
+		
+		<button onclick="translateJapanese()" style="width: 160px; height: 40px; margin: 10px 0px 0px 0px;">
+			<label data-UIlang="en"><b>Translate Japanese<br>per one line.</b></label>
+			<label data-UIlang="ja"><b>１単語の行に<br>日本語タグ付け</b></label>
+		</button>
+
+		<button onclick="deleteLinefeedCanmaMainNegative()" style="width: 160px; height: 40px; margin: 10px 0px 0px 0px;">
+			<label data-UIlang="en"><b>Delete linefeed ","</b></label>
+			<label data-UIlang="ja"><b>行末のカンマ削除</b></label>
+		</button>
+
+		<button id="UI_convertWeightNAIto1111" onclick="convertWeightNAIto1111()" style="width: 160px; height: 40px; margin: 10px 0px 0px 0px;">
+			<label data-UIlang="en"><b>Convert weight<br>NAI to 1111</b></label>
+			<label data-UIlang="ja"><b>NAI ウェイトを変換</b></label>
+		</button>
+	</div> <!-- Text Tools -->
+	
+	<div style="height: 0px; border:2px solid #333333; margin: 10px 0px 0px 0px;"> 
+	</div>
+	
+	<!-- UIConfig Tools -->
+	<div style="display: flex; flex-direction: column;"> 
+		<label data-UIlang="en"><b>CONFIG</b></label>
+		<label data-UIlang="ja"><b>設定</b></label>
+
+		<div style="font-size: 80%; flex-direction: row;">
+			<label data-UIlang="en"><b>UI LANGUAGE</b></label>
+			<label data-UIlang="ja"><b>UI 言語設定</b></label>
+			<select id="selectLanguage">
+			    <option value="ja">日本語</option>
+			    <option value="en">English</option>
+			</select>
+		</div>
+
+		<div style="font-size: 80%; flex-direction: row;">
+			<label data-UIlang="en"><b>EDITOR THEME</b></label>
+			<label data-UIlang="ja"><b>エディタ　見た目</b></label>
+			<select id="selectEditorTheme">
+			    <option value="terminal">Terminal</option>
+			    <option value="eclipse">Eclipse</option>
+			    <option value="cobalt">Cobalt</option>
+			</select>
+		</div>
+
+		<div style="font-size: 80%; flex-direction: row;">
+			<label data-UIlang="en"><b>EDITOR FONT SIZE</b></label>
+			<label data-UIlang="ja"><b>エディタ　フォントサイズ</b></label>
+			<select id="selectEditorFontsize">
+			    <option value="12">12</option>
+			    <option value="14">14</option>
+			    <option value="16">16</option>
+			</select>
+		</div>
+
+		<div style="font-size: 80%; display: flex; flex-direction: row; text-align: center; margin: 5px 0px 0px 0px;">
+			<div style="width: 80px; height: 50px; border:2px solid #333333; margin: 0px 0px 0px 0px;">
+				<a href="#" id="downloadBackup" download="zzzBackup.json">
+					<label data-UIlang="en"><b>SAVE Backup<br>file.<br>Click here.</b></label>
+					<label data-UIlang="ja"><b>バックアップ<br>保存<br>クリック</b></label>
+				</a>
+			</div>
+			<label id="loadBackupFile" style="width: 80px; height: 50px; border:2px dashed #333333; margin: 0px 0px 0px 0px;">
+				<label data-UIlang="en">Load backup<br>file.<br>Drop here.</label>
+				<label data-UIlang="ja">バックアップ<br>読込<br>ここにドロップ</label>
+			</label>
+		</div>
+
+		<button onclick="clearZZZlocalStorageData();" style="width: 190px; height: 50px;margin: 8px 0px 0px 0px;">
+			<label data-UIlang="en"><b>Initialize this tool and Clear localStorage this data.</b></label>
+			<label data-UIlang="ja"><b>localStorage からこのツールのデータをクリア</b></label>
+		</button>
+
+	</div> <!-- UIConfig Tools -->
+	
+	<div style="height: 0px; border:2px solid #333333; margin: 10px 0px 0px 0px;"> 
+	</div>
+	
+</div> <!-- toolsContainer -->
+
+
+<!-- editorGroupMain -->
+<div style="width: 450px;display: flex; flex-direction: column; padding:1px; border:2px solid #333333;">
+
+	<!-- selectWorkSlot -->
+	<div style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+		<div style="display: flex; flex-direction: row;">
+			<label data-UIlang="en"><b>WORK PAGE</b></label>
+			<label data-UIlang="ja"><b>作業ページ</b></label>
+			<select id="selectWorkSlot" style="width: 300px;">
+			</select>
+		</div>
+	</div> <!-- selectWorkSlot -->
+
+	<div style="height: 0px; border:2px solid #888888; margin: 2px 0px 2px 0px;"> 
+	</div>
+
+	<!-- Editor MAIN -->
+	<div id="editorMainContainer" style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+		<div style="display: flex; flex-direction: row;">
+			<label data-UIlang="en"><b>MAIN</b></label>
+			<label data-UIlang="ja"><b>メイン</b></label>
+			<button onclick='editor[ "MAIN" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Close All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
+			</button>
+			<button onclick='editor[ "MAIN" ].session.unfold();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Open All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック開ける</b></label>
+			</button>
+		</div>
+		<div id="MAIN" style="height: 500px; min-height: 100px;">
+		</div>
+	</div> 	<!-- Editor MAIN -->
+	
+	<div id="separateLinePrompt" style="width: 440px; height: 2px; border:2px solid #888888; margin: 2px 0px 2px 3px;"> 
+	</div>
+
+	<!-- Editor NEGATIVE -->
+	<div id="editorNegativeContainer" style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+		<div style="display: flex; flex-direction: row;">
+			<label data-UIlang="en"><b>NEGATIVE</b></label>
+			<label data-UIlang="ja"><b>ネガティブ</b></label>
+			<button onclick='editor[ "NEGATIVE" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Close All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
+			</button>
+			<button onclick='editor[ "NEGATIVE" ].session.unfold();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Open All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック開ける</b></label>
+			</button>
+		</div>
+		<div id="NEGATIVE" style="height: 200px; min-height: 100px;">
+		</div>
+	</div> 	<!-- Editor NEGATIVE -->
+
+</div> <!-- editorGroupMain -->
+
+<!-- editorGroupMemo -->
+<div style="width: 450px;display: flex; flex-direction: column; padding:1px; border:2px solid #333333;">
+
+	<!-- selectWorkSlotMemo -->
+	<div style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+		<div style="display: flex; flex-direction: row;">
+			<label data-UIlang="en"><b>WORK PAGE</b></label>
+			<label data-UIlang="ja"><b>作業ページ</b></label>
+			<select id="selectWorkSlotMemo" style="width: 300px;">
+			</select>
+		</div>
+	</div> <!-- selectWorkSlotMemo -->
+
+	<div style="height: 0px; border:2px solid #888888; margin: 2px 0px 2px 0px;"> 
+	</div>
+
+	<!-- Editor MEMO -->
+	<div style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+		<div style="display: flex; flex-direction: row;">
+			<label data-UIlang="en"><b>FREE NOTE</b></label>
+			<label data-UIlang="ja"><b>自由帳</b></label>
+			<button onclick='editor[ "MEMO" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Close All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
+			</button>
+			<button onclick='editor[ "MEMO" ].session.unfold();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Open All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック開ける</b></label>
+			</button>
+		</div>
+		<div id="MEMO" style="height: 600px; min-height: 100px;">
+		</div>
+		<label id="parseDanbooruText" style="width: 200px; height: 120px; text-align: center; border:4px dashed #333333; margin: 10px 0px 0px 0px;">
+			<label data-UIlang="en"><b>DROP Danbooru text</b><br>danbooru page CTRL+A<br>and<br>Drag & Drop here.</label>
+			<label data-UIlang="ja"><b>Danbooru テキスト</b><br>danbooru のページで<br> CTRL+A 全選択<br>それをここに<br>ドラッグ＆ドロップ</label>
+		</label>
+	</div>	<!-- Editor MEMO -->
+
+</div> <!-- editorGroupMemo -->
+
+</div>
+
+<div id="LOG" "style="width: 100px; height: 100px;">
+</div>
+
+<style>
+.ace_gutter-cell {
+	padding-left: 3px;
+}
+.ace_gutter-cell.ace_warning {
+    background: none;
+    border-left-color: yellow;
+}
+
+.ace_gutter-cell.ace_error {
+    background: none;
+    border-left-color: red;
+}
+
+.ace_gutter-cell.ace_info {
+    background: none;
+    border-left-color: gray;
+}
+#editor { position: absolute; top: 0; left: 0; right: 0; bottom: 0;}
+.ace_link_marker {
+  position: absolute;
+  border-bottom: 2px solid blue;
+}
+</style>
+
+<script>
+
+////////////////////////////////////////////////////////////////////////
+//
+//	AUTOMATIC1111 Gradio
+//
+class AUTO1111GRADIO{
+	constructor( gradio ){
+	
+		this.gradio = gradio;
+
+		this.tab = "";
+		this.main_prompt = null;
+		this.neg_prompt = null;
+
+		this.tab_ids = [
+			"tab_txt2img",
+			"tab_img2img",
+			"tab_extras",
+			"tab_pnginfo",
+//			"tab_images_history",
+			"tab_modelmerger",
+			"tab_ti",
+			"tab_settings"
+		];
+
+		this.txt2img_main_selector = "#txt2img_prompt > label > textarea";
+		this.txt2img_main = null;
+		this.txt2img_neg_selector = "#txt2img_neg_prompt > label > textarea";
+		this.txt2img_neg = null;
+		this.txt2img_samplingsteps_selector = "#range_id_0";
+		this.txt2img_neg = null;
+		this.txt2img_width_selector = "#range_id_1";
+		this.txt2img_width = null;
+		this.txt2img_height_selector = "#range_id_2";
+		this.txt2img_height = null;
+		
+				
+		
+		this.img2img_main_selector = "#img2img_prompt > label > textarea";
+		this.img2img_main = null;
+		this.img2img_neg_selector = "#img2img_neg_prompt > label > textarea";
+		this.img2img_neg = null;
+
+/*
+Stable Diffusion checkpoint
+Sampling Steps
+Sampling method
+Width
+Height
+Restore faces
+Tiling
+Highres. fix
+Firstpass width
+Firstpass height
+Denoising strength
+Batch count
+Batch size
+CFG Scale
+Seed
+Extra
+Variation seed
+Variation strength
+Resize seed from width
+Resize seed from height
+*/
+	}
+	
+	checkCurrentTab(){
+	
+		this.tab = "";
+		
+		for( var i = 0; i < this.tab_ids.length; i++ ){
+			if( gradio.querySelector( "#" + this.tab_ids[ i ] ).style.display == "block" ){
+				this.tab = this.tab_ids[ i ];
+			}
+		}
+
+		return this.tab;
+	}
+	
+	updateElementDataFromParentWindow(){
+		
+		this.checkCurrentTab();
+		
+		if( this.tab == "tab_txt2img" ){
+			this.main_prompt = gradio.querySelector( this.txt2img_main_selector );
+			this.neg_prompt = gradio.querySelector( this.txt2img_neg_selector );
+		} else if( this.tab == "tab_img2img" ){
+			this.main_prompt = gradio.querySelector( this.img2img_main_selector );
+			this.neg_prompt = gradio.querySelector( this.img2img_neg_selector );
+		}
+		
+		return this.tab;
+		
+	}
+
+}
+var gradio = window.opener.gradioApp();
+
+var a1111 = new AUTO1111GRADIO( gradio );
+a1111.updateElementDataFromParentWindow();
+
+///////////////////////////////////////////////////////////
+//
+//	TAG translate dictionary
+//
+var tagsEnJa = [];
+var tagsJaEn = [];
+function loadTags() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "./tagsEnJa.txt" + "?" + (new Date()).getTime(), false);
+    request.send();
+    
+    let text = request.responseText;
+	text = text.replace(/\r\n|\r/g, "\n");
+    var lines = text.split( "\n" );
+    for ( let i = 0; i < lines.length; i++ ) {
+    	if( lines[ i ] == "" ){
+    		continue;
+    	}
+    	let tmp = lines[ i ].split( /````/ );
+    	if( tmp.length < 2 ){
+    		continue;
+    	}
+    	var dict = { word: tmp[ 0 ], trans: tmp[ 1 ] };
+    	tagsEnJa.push( dict );
+    }
+
+    let len = tagsEnJa.length;
+    for ( let i = 0; i < len; i++ ) {
+    	let ja = tagsEnJa[ i ][ "trans" ];
+    	let en = tagsEnJa[ i ][ "word" ];
+    	var JaEn = { word: ja, trans: en };
+    	tagsJaEn.push( JaEn );
+    	
+    }
+}
+loadTags();
+
+function getJa( line ){
+	var ja = "";
+	var word = line.replace( /\s*\/\/.*$/, "" ); // Delete comment
+	word = word.replace( /(\`.*\`.*$)/, "" ); // Delete transtext
+	word = word.replace( /^\s*\((.*)\:\s*(\d|\.)*\s*\)/, "$1" );	// Delete weight
+	word = word.replace( /,/, "" );	// Delete canma
+	word = word.trim();
+	var word_noneunderbar = word.replaceAll( "_", " " );
+	if( word.length != 0 ){
+		
+		for( let i = 0; i < tagsEnJa.length; i++ ){
+			let en = tagsEnJa[ i ][ "word" ];
+			if( word == en || word_noneunderbar == en ){
+				ja = tagsEnJa[ i ][ "trans" ];
+				break;
+			}
+		}
+	}
+
+	if( ja === "" && word.length != 0 ){
+		toolLog( word_noneunderbar );
+	}
+	return [word, ja];
+}
+///////////////////////////////////////////////////////////---
+
+function translateEnToJa( text ){
+
+	var ret = "";
+	
+	text = text.replace(/\r\n|\r/g, "\n");
+
+	var lines = text.split( "\n" );
+	for ( let i = 0; i < lines.length; i++ ) {
+		let line = lines[ i ].replace( /\s*\`.*\`/, "" ); // Delete transtext
+		let [ word, ja ] = getJa( line );
+		if( word.length == 0 ){
+			ret += lines[ i ] + "\n";
+		} else if( ja.length == 0 ){
+			ret += line + "\n";
+		} else {
+			ret += line + "  `" + ja + "`\n";
+		}
+	}
+	ret = ret.replace( /\n\n$/g, "\n" );
+	
+	return ret;
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//	Ace editor hyperlink
+//
+// from http://jsfiddle.net/tzmartin/hwzjjah2/
+//
+define("hoverlink", [], function(require, exports, module) {
+"use strict";
+
+var oop = require("ace/lib/oop");
+var event = require("ace/lib/event");
+var Range = require("ace/range").Range;
+var EventEmitter = require("ace/lib/event_emitter").EventEmitter;
+
+var HoverLink = function(editor) {
+    if (editor.hoverLink)
+        return;
+    editor.hoverLink = this;
+    this.editor = editor;
+
+    this.update = this.update.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseOut = this.onMouseOut.bind(this);
+    this.onClick = this.onClick.bind(this);
+    event.addListener(editor.renderer.scroller, "mousemove", this.onMouseMove);
+    event.addListener(editor.renderer.content, "mouseout", this.onMouseOut);
+    event.addListener(editor.renderer.content, "click", this.onClick);
+};
+
+(function(){
+    oop.implement(this, EventEmitter);
+    
+    this.token = {};
+    this.range = new Range();
+
+    this.update = function() {
+        this.$timer = null;
+        var editor = this.editor;
+        var renderer = editor.renderer;
+        
+        var canvasPos = renderer.scroller.getBoundingClientRect();
+        var offset = (this.x + renderer.scrollLeft - canvasPos.left - renderer.$padding) / renderer.characterWidth;
+        var row = Math.floor((this.y + renderer.scrollTop - canvasPos.top) / renderer.lineHeight);
+        var col = Math.round(offset);
+
+        var screenPos = {row: row, column: col, side: offset - col > 0 ? 1 : -1};
+        var session = editor.session;
+        var docPos = session.screenToDocumentPosition(screenPos.row, screenPos.column);
+        
+        var selectionRange = editor.selection.getRange();
+        if (!selectionRange.isEmpty()) {
+            if (selectionRange.start.row <= row && selectionRange.end.row >= row)
+                return this.clear();
+        }
+        
+        var line = editor.session.getLine(docPos.row);
+        if (docPos.column == line.length) {
+            var clippedPos = editor.session.documentToScreenPosition(docPos.row, docPos.column);
+            if (clippedPos.column != screenPos.column) {
+                return this.clear();
+            }
+        }
+        
+        var token = this.findLink(docPos.row, docPos.column);
+        this.link = token;
+        if (!token) {
+            return this.clear();
+        }
+        this.isOpen = true
+        editor.renderer.setCursorStyle("pointer");
+        
+        session.removeMarker(this.marker);
+        
+        this.range =  new Range(token.row, token.start, token.row, token.start + token.value.length);
+        this.marker = session.addMarker(this.range, "ace_link_marker", "text", true);
+    };
+    
+    this.clear = function() {
+        if (this.isOpen) {
+            this.link = null;
+            this.editor.session.removeMarker(this.marker);
+            this.editor.renderer.setCursorStyle("");
+            this.isOpen = false;
+        }
+    };
+    
+    this.getMatchAround = function(regExp, string, col) {
+        var match;
+        regExp.lastIndex = 0;
+        string.replace(regExp, function(str) {
+            var offset = arguments[arguments.length-2];
+            var length = str.length;
+            if (offset <= col && offset + length >= col)
+                match = {
+                    start: offset,
+                    value: str
+                };
+        });
+    
+        return match;
+    };
+    
+    this.onClick = function() {
+        if (this.link) {
+            this.link.editor = this.editor;
+            this._signal("open", this.link);
+            window.open(this.link.value); // added this
+            this.clear()
+        }
+    };
+    
+    this.findLink = function(row, column) {
+        var editor = this.editor;
+        var session = editor.session;
+        var line = session.getLine(row);
+        
+        var match = this.getMatchAround(/https?:\/\/[^\s"']+/g, line, column);
+        if (!match)
+            return;
+        
+        match.row = row;
+        return match;
+    };
+    
+    this.onMouseMove = function(e) {
+        if (this.editor.$mouseHandler.isMousePressed) {
+            if (!this.editor.selection.isEmpty())
+                this.clear();
+            return;
+        }
+        this.x = e.clientX;
+        this.y = e.clientY;
+        this.update();
+    };
+
+    this.onMouseOut = function(e) {
+        this.clear();
+    };
+
+    this.destroy = function() {
+        this.onMouseOut();
+        event.removeListener(this.editor.renderer.scroller, "mousemove", this.onMouseMove);
+        event.removeListener(this.editor.renderer.content, "mouseout", this.onMouseOut);
+        delete this.editor.hoverLink;
+    };
+
+}).call(HoverLink.prototype);
+
+exports.HoverLink = HoverLink;
+
+});
+
+///////////////////////////////////////////////////////////
+//
+// Ace editor
+// custum completer
+//
+var langTools = ace.require( 'ace/ext/language_tools' );
+
+var tagsEnJaCompleter = {
+	getCompletions:function( editor, session, pos, prefix, callback ){
+		callback( null, tagsEnJa.map( function( table ){
+			return {
+				caption: table.word,
+				value: table.word + " `" + table.trans + "`",
+				meta: table.trans,
+			};
+		}));	
+	}
+};
+var tagsJaEnCompleter = {
+	getCompletions:function( editor, session, pos, prefix, callback ){
+		callback( null, tagsJaEn.map( function( table ){
+			return {
+				caption: table.word,
+				value: table.trans + " `" + table.word + "`",
+				meta: table.trans,
+			};
+		}));	
+	}
+};
+
+langTools.setCompleters([]);
+langTools.addCompleter( tagsEnJaCompleter );
+langTools.addCompleter( tagsJaEnCompleter );
+
+////////////////////////////////////////////////////////////////////////
+
+var editor = {};
+function createEditor( divId ){
+	editor[ divId ] = ace.edit( divId );
+	editor[ divId ].setTheme("ace/theme/terminal");
+	editor[ divId ].session.setMode("ace/mode/javascript");
+	editor[ divId ].session.setTabSize( 4 );
+//	editor[ divId ].session.setUseWrapMode( true );
+
+	HoverLink = require("hoverlink").HoverLink
+	editor[ divId ].hoverLink = new HoverLink( editor[ divId ] );
+	editor[ divId ].hoverLink.on("open", function() {
+	});
+}
+
+createEditor( "MAIN" );
+editor[ "MAIN" ].setOptions({
+	minLines: 40,
+  	enableBasicAutocompletion: true,
+});
+
+createEditor( "NEGATIVE" );
+editor[ "NEGATIVE" ].setOptions({
+	minLines: 50,
+  	enableBasicAutocompletion: true,
+});
+
+createEditor( "MEMO" );
+editor[ "MEMO" ].setOptions({
+	minLines: 50,
+  	enableBasicAutocompletion: true,
+});
+
+
+createEditor( "LOG" );
+editor[ "LOG" ].setOptions({
+	minLines: 10,
+	maxLines: 15,
+});
+editor[ "LOG" ].setValue( "Started.\n" );
+editor[ "LOG" ].clearSelection();
+
+///////////////////////////////////////////////////////////---
+
+
+
+///////////////////////////////////////////////////////////---
+function splitTranstext( line ){
+	var string = line.replace( /(\`.*\`.*$)/, "" );
+	var trans = RegExp.$1;
+
+	return [ string, trans ];
+}
+///////////////////////////////////////////////////////////---
+function splitCanma( text ){
+	var ret = "";
+	
+	text = text.replaceAll( /\r\n|\r/g, "\n" );
+	var lines = text.split( "\n" );
+	for( let i = 0; i < lines.length; i++ ){
+		var line = lines[ i ];
+		var [string, trans] = splitTranstext( line );
+		if( trans == "" ){
+		
+			line = line.replaceAll( /,(\s*)/g, ",$1\n" );
+			line = line.replaceAll( /\)\(/g, "\)\n\(" );
+			line = line.replaceAll( /\]\[/g, "\]\n\[" );
+			line = line.replaceAll( /\)\[/g, "\)\n\[" );
+			line = line.replaceAll( /\]\(/g, "\]\n\[" );
+			line = line.replace( /\n$/, "" );
+		}
+		ret += line + "\n";
+
+	}
+	ret = ret.replace( /\n$/, "" );
+
+	return ret;
+}
+function dedleteComment( text ){
+	text = text.replaceAll(/\r\n|\r/g, "\n");
+	text = text.replaceAll(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');	// Delete comments
+	return text;
+}
+
+///////////////////////////////////////////////////////////---
+// This parsing change SD token
+
+function dedleteUnderbar( text ){
+	text = text.replaceAll( "_", " " );
+	return text;
+}
+function deleteLinefeedCanma( text ){
+	text = text.replace(/\r\n|\r/g, "\n");
+	text = text.replaceAll( /,(\s*(\`.*\`)*)$/gm, "$1" );
+	return text;
+}
+///////////////////////////////////////////////////////////---
+function readPromptFrom1111(){
+
+	a1111.updateElementDataFromParentWindow();
+	
+	editor[ "MAIN" ].setValue(  a1111.main_prompt.value );
+	editor[ "NEGATIVE" ].setValue( a1111.neg_prompt.value );
+}
+///////////////////////////////////////////////////////////---
+
+function splitWord(){
+	editor[ "MAIN" ].setValue( splitCanma( editor[ "MAIN" ].getValue() ) );
+	editor[ "NEGATIVE" ].setValue( splitCanma( editor[ "NEGATIVE" ].getValue() ) );
+}
+
+///////////////////////////////////////////////////////////---
+function translateJapanese(){
+	editor[ "MAIN" ].setValue( translateEnToJa( editor[ "MAIN" ].getValue() ) );
+	editor[ "NEGATIVE" ].setValue( translateEnToJa( editor[ "NEGATIVE" ].getValue() ) );
+}
+
+///////////////////////////////////////////////////////////---
+
+function deleteLinefeedCanmaMainNegative(){
+	editor[ "MAIN" ].setValue( deleteLinefeedCanma( editor[ "MAIN" ].getValue() ) );
+	editor[ "NEGATIVE" ].setValue( deleteLinefeedCanma( editor[ "NEGATIVE" ].getValue() ) );
+}
+
+///////////////////////////////////////////////////////////---
+function parsePromptTo1111( text ){
+
+	text = text.replace(/\r\n|\r/g, "\n");
+	text = text.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');	// Delete comments
+	text = text.replace(/\`.*\`/gm, '');	// Delete transtext
+	text = text.replaceAll( /^\s+/gm, "" );							// Delete line-start \s
+	text = text.replaceAll( /\s*$/gm, "" );							// Delete line-end \s
+	text = text.replaceAll( /^\s*(\{|\})\s*$/gm, "\n" );			// Delete only "{" or "}" line
+	if( addCanma.checked ){
+		text = text.replaceAll( /([^,])\n/gm, "$1,\n" );					// Replace "\n" to ",\n"
+		text = text.replaceAll( /(\(|\[),/g, "$1" );						// Replace "(," to "("
+		text = text.replaceAll( /AND,/g, "AND" );							// Replace "AND," to "AND"
+		text = text.replaceAll( /^\s*,\s*$/gm, "" );						// Delete only "," line.
+	}
+
+	if( deleteLF.checked ){
+		text = text.replaceAll( /\n/g, " " );							// Replace "\n" to " "
+	}
+
+	return text;
+}
+function sendDataTo1111(){
+	
+	a1111.updateElementDataFromParentWindow();
+	if( a1111.tab !="tab_txt2img" && a1111.tab !="tab_img2img" ){
+		toolLog( "FAILED: No selected txt2img or img2img tab in 1111.");
+		return;
+	}
+
+	var e = new Event( "input", { bubbles:true, cancelable:true } );
+
+	var textMain = parsePromptTo1111( editor[ "MAIN" ].getValue() );
+	a1111.main_prompt.value = textMain;
+	a1111.main_prompt.dispatchEvent( e );
+
+	var textNegative = parsePromptTo1111( editor[ "NEGATIVE" ].getValue() );
+	a1111.neg_prompt.value = textNegative;
+	a1111.neg_prompt.dispatchEvent( e );
+
+	return;
+}
+
+
+/////////////////////////////////////////////////////
+const yyyymmddhhmmss = new Intl.DateTimeFormat(
+  undefined,
+  {
+    year:   'numeric',
+    month:  '2-digit',
+    day:    '2-digit',
+    hour:   '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  }
+)
+
+/////////////////////////////////////////////////////
+var parsePNGInfo = document.querySelector("#parsePNGInfo");
+parsePNGInfo.addEventListener("dragover", function(e) { e.stopPropagation();e.preventDefault();}, false);
+parsePNGInfo.addEventListener("dragenter", function(e) { e.stopPropagation();e.preventDefault();}, false);
+parsePNGInfo.addEventListener("drop",
+	function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		
+		const fileList = e.dataTransfer.files;
+		const pngfile = fileList[ 0 ];
+		setPNGInfoData( pngfile );
+	},
+false
+);
+
+function getPNGtEXtWH( bytes ){
+	var tEXt = [];
+	var width = -1;
+	var height = -1;
+	
+	var bytesString = "";
+	for( let i = 0; i < bytes.byteLength; i += 1024 ){
+		bytesString += String.fromCharCode.apply( "", new Uint8Array( bytes.slice( i, i + 1024 ) ) );
+	}
+	if( bytesString.substr( 1, 3 ).indexOf( "PNG" ) == -1 ){
+		toolLog('FAILED: Not PNG file');
+		return;
+	}
+	
+	// IHDR width, height
+	IHDR_start = bytesString.indexOf( "IHDR" );
+	width  = ( new DataView( bytes.slice( IHDR_start + 4, IHDR_start +  8 ) ) ).getUint32( 0 );
+	height = ( new DataView( bytes.slice( IHDR_start + 8, IHDR_start + 12 ) ) ).getUint32( 0 );
+
+	// tEXt
+	var idx = 0;
+	var tEXt_size = 0;
+	var tEXt_str = "";
+	while( true ){
+		idx = bytesString.indexOf( "tEXt", idx + 1 );
+		if( idx == -1 ){
+			break;
+		}
+		tEXt_size = ( new DataView( bytes.slice( idx - 4, idx ) ) ).getUint32( 0 );
+		tEXt_str = bytesString.substr( idx + 4, tEXt_size );
+		
+		tEXt.push( tEXt_str );
+	}
+	return {tEXt, width, height};
+}
+
+function setPNGInfoData( pngfile ){
+	var fileReader = new FileReader();
+	fileReader.onload = function( e ) {
+	
+		var bytes = e.target.result;
+		var {tEXt, width, height} = getPNGtEXtWH( bytes );
+
+		// Nothing tEXt data.
+		if( tEXt.length == 0 ){
+			toolLog( 'FAILED: This PNG nothing tEXt.' );
+			return;
+		}
+		
+		var params = {};
+		var tmp = "";
+
+		// AUTOMATIC1111
+/*
+    generation_params = {
+        "Steps": p.steps,
+        "Sampler": get_correct_sampler(p)[p.sampler_index].name,
+        "CFG scale": p.cfg_scale,
+        "Seed": all_seeds[index],
+        "Face restoration": (opts.face_restoration_model if p.restore_faces else None),
+        "Size": f"{p.width}x{p.height}",
+        "Model hash": getattr(p, 'sd_model_hash', None if not opts.add_model_hash_to_info or not shared.sd_model.sd_model_hash else shared.sd_model.sd_model_hash),
+        "Model": (None if not opts.add_model_name_to_info or not shared.sd_model.sd_checkpoint_info.model_name else shared.sd_model.sd_checkpoint_info.model_name.replace(',', '').replace(':', '')),
+        "Hypernet": (None if shared.loaded_hypernetwork is None else shared.loaded_hypernetwork.name.replace(',', '').replace(':', '')),
+        "Batch size": (None if p.batch_size < 2 else p.batch_size),
+        "Batch pos": (None if p.batch_size < 2 else position_in_batch),
+        "Variation seed": (None if p.subseed_strength == 0 else all_subseeds[index]),
+        "Variation seed strength": (None if p.subseed_strength == 0 else p.subseed_strength),
+        "Seed resize from": (None if p.seed_resize_from_w == 0 or p.seed_resize_from_h == 0 else f"{p.seed_resize_from_w}x{p.seed_resize_from_h}"),
+        "Denoising strength": getattr(p, 'denoising_strength', None),
+        "Eta": (None if p.sampler is None or p.sampler.eta == p.sampler.default_eta else p.sampler.eta),
+        "Clip skip": None if clip_skip <= 1 else clip_skip,
+        "ENSD": None if opts.eta_noise_seed_delta == 0 else opts.eta_noise_seed_delta,
+    }
+            self.extra_generation_params["First pass size"] = f"{self.firstphase_width}x{self.firstphase_height}"
+
+*/
+		if( tEXt.length == 1 && tEXt[ 0 ].indexOf( "parameters" ) == 0 ){
+
+			toolLog( 'AUTOMATIC1111 Style.' );
+
+			tmp = tEXt[ 0 ].split( /(^parameters\0|Negative prompt: |Steps: )/ );
+			params[ "Prompt" ] = tmp[ 2 ];
+			params[ "Negative" ] = tmp[ 4 ];
+
+			otherParam = "Steps: " + tmp[ 6 ];
+
+			tmp = otherParam.match( /Steps: (.*?)(, |\0|$)/ );
+			params[ "Steps" ] 				= tmp ? tmp[ 1 ] : "";
+			tmp = otherParam.match( /Sampler: (.*?)(, |\0|$)/ );
+			params[ "Sampler" ]  			= tmp ? tmp[ 1 ] : "";
+			tmp = otherParam.match( /CFG scale: (.*?)(, |\0|$)/ )
+			params[ "CFG scale" ]  			= tmp ? tmp[ 1 ] : "";
+			tmp = otherParam.match( /Seed: (.*?)(, |\0|$)/ );
+			params[ "Seed" ]  				= tmp ? tmp[ 1 ] : "";
+			tmp = otherParam.match( /Size: (.*?)(, |\0|$)/ );
+			params[ "Size" ]  				= tmp ? tmp[ 1 ] : "";
+			tmp = otherParam.match( /Model hash: (.*?)(, |\0|$)/ );
+			params[ "Model_hash" ]  		= tmp ? tmp[ 1 ] : "";
+			tmp = otherParam.match( /Denoising strength: (.*?)(, |\0|$)/ );
+			params[ "Denoising strength" ]  = tmp ? tmp[ 1 ] : "";
+			tmp = otherParam.match( /Clip skip: (.*?)(, |\0|$)/ );
+			params[ "Clip skip" ]  			= tmp ? tmp[ 1 ] : "";
+
+			if( params[ "Size" ] ){
+				tmp = params[ "Size" ].split( "x" );
+				width = tmp[ 0 ];
+				height = tmp[ 1 ];
+			}
+
+		// Novel AI
+		} else if( tEXt.length == 5 && tEXt[ 0 ].indexOf( "Title\0AI generated image" ) == 0 ){
+			toolLog( 'Novel AI Style.' );
+			
+			params[ "Prompt" ] = tEXt[ 1 ].replace( /^Description\0/, "" );
+			params[ "softwear" ] = tEXt[ 2 ].replace( /^Software\0/, "" );
+			params[ "source" ] = tEXt[ 3 ].replace( /^Source\0/, "" );
+			
+			var comment = tEXt[ 4 ].replace( /^Comment\0/, "" );
+			tmp = comment.match( /\"steps\": (.*?)(, |}|\0|$)/ );
+			params[ "Steps" ] = tmp ? tmp[ 1 ] : "";
+			tmp = comment.match( /\"sampler\": \"(.*?)\"(, |}|\0|$)/ );
+			params[ "Sampler" ] = tmp ? tmp[ 1 ] : "";
+			let sampler = tmp[ 4 ];
+			tmp = comment.match( /\"seed\": (.*?)(, |}|\0|$)/ );
+			params[ "Seed" ] = tmp ? tmp[ 1 ] : "";
+			let seed = tmp[ 6 ];
+			tmp = comment.match( /\"strength\": (.*?)(, |}|\0|$)/ );
+			params[ "Denoising strength" ] = tmp ? tmp[ 1 ] : "";
+			let strength = tmp[ 8 ];
+			tmp = comment.match( /\"noise\": (.*?)(, |}|\0|$)/ );
+			params[ "noise" ] = tmp ? tmp[ 1 ] : "";
+			let noise = tmp[ 10 ];
+			tmp = comment.match( /\"scale\": (.*?)(, |}|\0|$)/ );
+			params[ "CFG scale" ] = tmp ? tmp[ 1 ] : "";
+			let scale = tmp[ 12 ];
+			tmp = comment.match( /\"uc\": \"(.*)\"}/ );
+			params[ "Negative" ] = tmp ? tmp[ 1 ] : "";
+			let uc = tmp[ 14 ];
+
+			var samplerMapping ={
+				k_euler_ancestral:"Euler a",
+				k_euler:"Euler"
+			};
+			if( params[ "Sampler" ] ){
+				params[ "Sampler" ] = samplerMapping[ params[ "Sampler" ] ];
+			}
+			if( params[ "Prompt" ] ){
+				params[ "Prompt" ] = calcWeightNAIto1111( params[ "Prompt" ] );
+			}
+			
+		} else {
+			toolLog( 'FAILED: Unknown tEXt Style.' );
+			return;
+		}
+
+		for( let key in params ) {
+		  toolLog( '"' + key + '" : "' + params[ key ] + '"');
+		}
+
+		let isSplit = false;
+		let isTrans = false;
+		let main = params[ "Prompt" ];
+		let neg = params[ "Negative" ];
+		if( isSplit ){
+			main = splitCanma( main );
+			neg = splitCanma( neg );
+			if( isTrans ){
+				main = translateEnToJa( main );
+				neg = translateEnToJa( neg );
+			}
+		}
+		editor[ "MAIN" ].setValue( main );
+		editor[ "NEGATIVE" ].setValue( neg );
+
+		return;
+	};
+	fileReader.onerror = function( e ) {
+		toolLog('FAILED: reading failed');
+	};
+	fileReader.readAsArrayBuffer( pngfile );	
+}
+/////////////////////////////////////////////////////
+function calcWeightNAIto1111( text ){
+
+	text = text.replaceAll( /((\{|\[)( |\t)+)/g, "$2" );
+	text = text.replaceAll( /(( |\t)+(\}|\]))/g, "$3" );
+
+	var newText = "";
+	var sum = 1.0;
+	for ( var i = 0; i < text.length; i++ ) {
+		let c = text.charAt( i );
+		if( c == "{" || c == "[" ){
+			for( ; ( c == "{" || c == "[" ); i++, c = text.charAt( i ) ){
+				if( c == "{" ){
+					sum *= 1.05;
+				} else if( c == "[" ){
+					sum /= 1.05;
+				}
+			}
+			newText += "(";
+			i--;
+
+		} else if( c == "}" || c == "]" ){
+			let weight = sum;
+			for( ; ( c == "}" || c == "]" ); i++, c = text.charAt( i ) ){
+				if( c == "}" ){
+					sum /= 1.05;
+				} else if( c == "]" ){
+					sum *= 1.05;
+				}
+			}
+			newText += ":" + weight.toPrecision(4) + ")";
+			i--;
+
+		} else {
+			newText += c;
+		}
+		
+	}
+	
+	// create count log.
+	var open1 = 0;
+	var open2 = 0;
+	var close1 = 0;
+	var close2 = 0;
+	for ( var i = 0; i < text.length; i++ ) {
+		let c = text.charAt( i );
+		open1 += ( c == "{" ) ? 1 : 0 ;
+		open2 += ( c == "[" ) ? 1 : 0 ;
+		close1 += ( c == "}" ) ? 1 : 0 ;
+		close2 += ( c == "]" ) ? 1 : 0 ;
+	}
+	toolLog( '{:' + open1 + '   [:' + open2 + '   }:' + close1 + '   ]:' + close2 );
+	if( sum != 1.0 ){
+		toolLog( 'convertWeightNAIto1111: WARNING "{[" "}]" different count.' );
+	}
+	
+	return newText;
+}
+
+/////////////////////////////////////////////////////
+function convertWeightNAIto1111(){
+
+	editor[ "MAIN" ].setValue(  calcWeightNAIto1111( editor[ "MAIN" ].getValue() ) );
+	editor[ "NEGATIVE" ].setValue( calcWeightNAIto1111( editor[ "NEGATIVE" ].getValue() ) );
+}
+
+
+/////////////////////////////////////////////////////
+//
+// Read danbooru text
+//
+var parseDanbooruText = document.querySelector("#parseDanbooruText");
+parseDanbooruText.addEventListener("dragover", function(e) { e.stopPropagation();e.preventDefault();}, false);
+parseDanbooruText.addEventListener("dragenter", function(e) { e.stopPropagation();e.preventDefault();}, false);
+parseDanbooruText.addEventListener("drop",
+	function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		var text = e.dataTransfer.getData( "text/plain" );
+		text = text.replace( /\r\n|\r/g, "\n" );
+		
+		var sitename = "";	// danbooru, gelbooru, sankaku
+		if( text.match( /^\s*Danbooru/ ) && text.match( /\n\? .* \d?/ ) ){
+			sitename = "danbooru";
+		} else if( text.match( /Sankaku Channel/ ) && text.match( / \(\?\) / ) ){
+			sitename = "sankaku";
+		} else if( text.match( /\nStatistics\n/ ) && text.match( /[^\n]\? .* (\d*?)\?/ ) ){
+			sitename = "gelbooru";
+		} else {
+			sitename = "unknown";
+		}
+
+		// POST ID
+		var url = "";
+		var postID = "";
+		if( sitename == "danbooru" ){
+			text.match( /\nInformation\nID\: (\d+)\n/ );
+			postID = RegExp.$1;
+			url = "https://danbooru.donmai.us/posts/" + postID;
+		} else if( sitename == "sankaku" ){
+			text.match( /\nSankaku Channel\/Post (\d+)\n/ );
+			postID = RegExp.$1;
+			url = "https://chan.sankakucomplex.com/post/show/" + postID;
+		} else if( sitename == "gelbooru" ){
+			text.match( /\n Id: (\d+)\n/ );
+			postID = RegExp.$1;
+			url = "https://gelbooru.com/index.php?page=post&s=view&id=" + postID;
+		}
+
+		// Tags
+		if( sitename == "gelbooru" ){
+			text = text.replaceAll( /(\? )/g, "\n\? " );
+		}
+
+    	var outtext = "";
+		var lines = text.split( '\n' );
+		if( sitename == "danbooru" || sitename == "gelbooru" ){
+			for ( var i = 0; i < lines.length; i++ ) {
+				if( lines[ i ].match( /^\? / ) ){
+					var tagText = lines[ i ].replace( /^\? (.*) \d.*$/, "$1" );
+					tagText = tagText.replaceAll( /(\(|\))/g, "" );
+					tagText = tagText.replaceAll( /_/g, " " );
+					outtext += tagText + "\n";
+				}
+			}
+		} else if( sitename == "sankaku" ){
+			for ( var i = 0; i < lines.length; i++ ) {
+				if( lines[ i ].match( / \(\?\) / ) ){
+					var tagText = lines[ i ].replace( /^(.*) \(\?\) \d.*$/, "$1" );
+					tagText = tagText.replaceAll( /(\(|\))/g, "" );
+					tagText = tagText.replaceAll( /_/g, " " );
+					outtext += tagText + "\n";
+				}
+			}
+		}
+		
+
+		if( outtext == "" ){
+			return;
+		}
+		
+		outtext = translateEnToJa( outtext );
+
+		var memotext = "\n"
+		+ "// " + yyyymmddhhmmss.format( new Date() ) + "\n"
+		+ "// " + url + "\n"
+		+ "{\n"
+		+ outtext
+		+ "}\n\n"
+		;
+		
+		
+		editor[ "MEMO" ].gotoLine( 2, 0 );
+		editor[ "MEMO" ].insert( memotext, -1 );
+
+	},
+false
+);
+
+/////////////////////////////////////////////////////
+// Clear localStorage
+//
+
+function clearZZZlocalStorageData(){
+	var keys = [];
+	let len = localStorage.length;
+	for( let i = 0; i < len; i++ ){  
+		keys.push( localStorage.key( i ) );
+	}
+	
+	for( let i = 0; i < len; i++ ){
+		let key = keys[ i ];
+		if( key.match( "ZZZ" ) ){
+			localStorage.removeItem( key );
+			toolLog( "clearZZZlocalStorageData: " + key + " DELETED." );
+		}
+	}
+}
+
+
+/////////////////////////////////////////////////////
+// UI Language
+function changeUILanguage(){
+	let lang = document.querySelector("#selectLanguage").value;
+
+	const elments = document.querySelectorAll('[data-UIlang]');
+	for( let i = 0; i < elments.length; i++ ){
+		elments[ i ].style.display = ( elments[ i ].dataset.uilang == lang ) ? "" : "none";
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+function toolLog( text ){
+	editor[ "LOG" ].setValue( editor[ "LOG" ].getValue() + text + "\n" );
+}
+
+////////////////////////////////////////////////////////////////////////
+var addCanma = document.querySelector("#addCanma");
+addCanma.checked = ( localStorage.getItem("ZZZ_addCanma_value") == "false" ? false : true );
+addCanma.addEventListener("change",
+	function( e ) {
+		localStorage.setItem( "ZZZ_addCanma_value", addCanma.checked );
+	}
+);
+////////////////////////////////////////////////////////////////////////
+var deleteLF = document.querySelector("#deleteLF");
+deleteLF.checked = ( localStorage.getItem("ZZZ_deleteLF_value") == "false" ? false : true );
+deleteLF.addEventListener("change",
+	function( e ) {
+		localStorage.setItem( "ZZZ_deleteLF_value", deleteLF.checked );
+	}
+);
+////////////////////////////////////////////////////////////////////////
+{
+	let selectLanguage = document.querySelector("#selectLanguage");
+	let val = localStorage.getItem("ZZZ_selectLanguage_value");
+	let options = selectLanguage.options ;
+	for( let i = 0; i < options.length; i++ ){
+		if( options[ i ].value === val ){
+			options[ i ].selected = true;
+		}
+	}
+	selectLanguage.addEventListener("change",
+		function( e ) {
+			changeUILanguage();
+			localStorage.setItem( "ZZZ_selectLanguage_value", selectLanguage.value );
+		}
+	);
+}
+{
+	let selectEditorTheme = document.querySelector("#selectEditorTheme");
+	let val = localStorage.getItem("ZZZ_selectEditorTheme_value");
+	let options = selectEditorTheme.options ;
+	for( let i = 0; i < options.length; i++ ){
+		if( options[ i ].value === val ){
+			options[ i ].selected = true;
+			for( let key in editor ) {
+				editor[ key ].setTheme( "ace/theme/" + val );
+			}
+		}
+	}
+	selectEditorTheme.addEventListener("change",
+		function( e ) {
+			let theme = document.querySelector("#selectEditorTheme").value;
+			for( let key in editor ) {
+				editor[ key ].setTheme( "ace/theme/" + theme );
+			}
+			localStorage.setItem( "ZZZ_selectEditorTheme_value", theme );
+		}
+	);
+}
+{
+	let selectEditorFontsize = document.querySelector("#selectEditorFontsize");
+	let val = localStorage.getItem("ZZZ_selectEditorFontsize_value");
+	let options = selectEditorFontsize.options ;
+	for( let i = 0; i < options.length; i++ ){
+		if( options[ i ].value === val ){
+			options[ i ].selected = true;
+			for( let key in editor ) {
+				editor[ key ].setFontSize( val );
+			}
+		}
+	}
+	selectEditorFontsize.addEventListener("change",
+		function( e ) {
+			let size = document.querySelector("#selectEditorFontsize").value;
+			for( let key in editor ) {
+				editor[ key ].setFontSize( size );
+			}
+			localStorage.setItem( "ZZZ_selectEditorFontsize_value", size );
+		}
+	);
+}
+
+class SlotData{
+	constructor( dataidx, promptmain, promptNegative, lastUpdateTime ){
+		this.dataidx = dataidx;
+		this.promptMain = promptmain;
+		this.promptNegative = promptNegative;
+		this.lastUpdateTime = lastUpdateTime;
+		this.viewText = this.dataidx + " : " + this.promptMain.substring( 0, 20 );
+		localStorage.setItem("ZZZ_SlotData_" + this.dataidx + "_promptMain", this.promptMain );
+	}
+
+	updateViewText(){
+		this.viewText = this.dataidx + " : " + this.promptMain.substring( 0, 20 );
+	}
+	getViewText(){
+		this.updateViewText();
+		return this.viewText;;
+	}
+	
+	updatePromptMain( text ){
+		this.promptMain = text;
+		localStorage.setItem("ZZZ_SlotData_" + this.dataidx + "_promptMain", this.promptMain );
+		this.updateViewText();
+	}
+	updatePromptNegative( text ){
+		this.promptNegative = text;
+		localStorage.setItem("ZZZ_SlotData_" + this.dataidx + "_promptNegative", this.promptNegative );
+	}
+	
+	
+}
+
+class SelectWorkSlot{
+	constructor( elementId ){
+		this.selectWorkSlot = document.querySelector("#" + elementId );
+		this.slotData = [];
+		for( let i = 0; i < 40; i++ ){
+			let promptmain = localStorage.getItem("ZZZ_SlotData_" + i + "_promptMain" );
+			if( promptmain != null){
+				let promptNegative = localStorage.getItem("ZZZ_SlotData_" + i + "_promptNegative" );
+				let lastUpdateTime = localStorage.getItem("ZZZ_SlotData_" + i + "_lastUpdateTime" );
+				this.slotData.push( new SlotData( i, promptmain, promptNegative, lastUpdateTime ) );
+			} else {
+				this.slotData.push( new SlotData( i, "// ---- EMPTY ----\n", "// ---- EMPTY ----\n", 0 ) );
+			}
+			
+   			let option = document.createElement( "option" );
+			option.value = i;
+			option.text = this.slotData[ i ].getViewText();
+			this.selectWorkSlot.appendChild( option );
+		}
+
+		var selectIdx = localStorage.getItem( "ZZZ_selectWorkSlot_selectIdx" );
+		if( selectIdx != null ){
+			this.selectWorkSlot.selectedIndex = selectIdx;
+		} else {
+			this.selectWorkSlot.selectedIndex = 0;
+		}
+
+		var me = this;
+		this.selectWorkSlot.addEventListener("change",
+			function( e ) {
+				me.changeSlot();
+			}
+		);
+		
+		this.changeSlot();
+	}
+	
+	changeSlot(){
+		let selectIdx = this.selectWorkSlot.value;
+		localStorage.setItem( "ZZZ_selectWorkSlot_selectIdx", selectIdx );
+
+		editor[ "MAIN" ].setValue( this.slotData[ selectIdx ].promptMain );
+		editor[ "MAIN" ].gotoLine( 0, 0 );
+		editor[ "MAIN" ].clearSelection();
+		
+		editor[ "NEGATIVE" ].setValue( this.slotData[ selectIdx ].promptNegative );
+		editor[ "NEGATIVE" ].gotoLine( 0, 0 );
+		editor[ "NEGATIVE" ].clearSelection();
+	}
+
+	updatePromptMain( text ){
+		let selIdx = this.selectWorkSlot.value;
+		this.slotData[ selIdx ].updatePromptMain( text );
+		this.selectWorkSlot.options[ selIdx ].text = this.slotData[ selIdx ].getViewText();
+	}
+	updatePromptNegative( text ){
+		this.slotData[ this.selectWorkSlot.value ].updatePromptNegative( text );
+	}
+
+}
+
+var selectWorkSlot = new SelectWorkSlot( "selectWorkSlot" );
+editor[ "MAIN" ].session.on('change', function( delta ) {
+	selectWorkSlot.updatePromptMain( editor[ "MAIN" ].getValue() );
+});
+editor[ "NEGATIVE" ].session.on('change', function( delta ) {
+	selectWorkSlot.updatePromptNegative( editor[ "NEGATIVE" ].getValue() );
+});
+
+///////////////////////////////////////////////////////////////////////////////
+
+class SlotDataMemo{
+	constructor( dataidx, prompt, lastUpdateTime ){
+		this.dataidx = dataidx;
+		this.prompt = prompt;
+		this.lastUpdateTime = lastUpdateTime;
+		this.viewText = this.dataidx + " : " + this.prompt.substring( 0, 20 );
+		localStorage.setItem("ZZZ_SlotDataMemo_" + this.dataidx + "_prompt", this.prompt );
+	}
+
+	updateViewText(){
+		this.viewText = this.dataidx + " : " + this.prompt.substring( 0, 20 );
+	}
+	getViewText(){
+		this.updateViewText();
+		return this.viewText;;
+	}
+	
+	updatePrompt( text ){
+		this.prompt = text;
+		localStorage.setItem("ZZZ_SlotDataMemo_" + this.dataidx + "_prompt", this.prompt );
+		this.updateViewText();
+	}
+
+}
+
+class SelectWorkSlotMemo{
+	constructor( elementId ){
+		this.selectWorkSlotMemo = document.querySelector("#" + elementId );
+		this.SlotDataMemo = [];
+		for( let i = 0; i < 40; i++ ){
+			let prompt = localStorage.getItem("ZZZ_SlotDataMemo_" + i + "_prompt" );
+			if( prompt != null){
+				let lastUpdateTime = localStorage.getItem("ZZZ_SlotDataMemo_" + i + "_lastUpdateTime" );
+				this.SlotDataMemo.push( new SlotDataMemo( i, prompt, lastUpdateTime ) );
+			} else {
+				this.SlotDataMemo.push( new SlotDataMemo( i, "// ---- EMPTY ----\n", 0 ) );
+			}
+			
+   			let option = document.createElement( "option" );
+			option.value = i;
+			option.text = this.SlotDataMemo[ i ].getViewText();
+			this.selectWorkSlotMemo.appendChild( option );
+		}
+
+		var selectIdx = localStorage.getItem( "ZZZ_selectWorkSlotMemo_selectIdx" );
+		if( selectIdx != null ){
+			this.selectWorkSlotMemo.selectedIndex = selectIdx;
+		} else {
+			this.selectWorkSlotMemo.selectedIndex = 0;
+		}
+
+		var me = this;
+		this.selectWorkSlotMemo.addEventListener("change",
+			function( e ) {
+				me.changeSlot();
+			}
+		);
+		
+		this.changeSlot();
+	}
+	
+	changeSlot(){
+		let selectIdx = this.selectWorkSlotMemo.value;
+		localStorage.setItem( "ZZZ_selectWorkSlotMemo_selectIdx", selectIdx );
+
+		editor[ "MEMO" ].setValue( this.SlotDataMemo[ selectIdx ].prompt );
+		editor[ "MEMO" ].gotoLine( 0, 0 );
+		editor[ "MEMO" ].clearSelection();
+
+	}
+
+	updatePrompt( text ){
+		let selIdx = this.selectWorkSlotMemo.value;
+		this.SlotDataMemo[ selIdx ].updatePrompt( text );
+		this.selectWorkSlotMemo.options[ selIdx ].text = this.SlotDataMemo[ selIdx ].getViewText();
+	}
+
+}
+
+var selectWorkSlotMemo = new SelectWorkSlotMemo( "selectWorkSlotMemo" );
+editor[ "MEMO" ].session.on('change', function( delta ) {
+	selectWorkSlotMemo.updatePrompt( editor[ "MEMO" ].getValue() );
+});
+
+
+///////////////////////////////////////////////////////////////////////////////
+{
+	document.getElementById( "downloadBackup" ).addEventListener(
+		"click", 
+		function( e ){
+			var datas = {};
+			for( i = 0; i < localStorage.length; i++ ){  
+				key = localStorage.key( i );
+				if( key.match( "ZZZ" ) ){
+					datas[ key ] = localStorage.getItem( key );
+				}
+			}
+			
+			event.currentTarget.download = "extensionEditor" + (new Date()).getTime() + ".json";
+			event.currentTarget.href = 
+				window.URL.createObjectURL(
+					new Blob( 
+						[ JSON.stringify( datas, null, "\t" ) ],
+						{ type: 'application/json' }
+					)
+				);
+		}
+	);
+}
+
+{
+	var loadBackupFile = document.querySelector("#loadBackupFile");
+	loadBackupFile.addEventListener("dragover", function(e) { e.stopPropagation();e.preventDefault();}, false);
+	loadBackupFile.addEventListener("dragenter", function(e) { e.stopPropagation();e.preventDefault();}, false);
+	loadBackupFile.addEventListener("drop",
+		function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			
+			const fileList = e.dataTransfer.files;
+			const file = fileList[ 0 ];
+			loadBackupFileToLocalStorage( file );
+		},
+	false
+	);
+
+	function loadBackupFileToLocalStorage( file ){
+		var fileReader = new FileReader();
+		fileReader.onload = function( e ) {
+			let json = e.target.result;
+			try{
+				var datas = JSON.parse( json );
+			} catch( e ) {
+				toolLog( 'FAILED: JSON.parse' );
+			}
+			for( let key in datas ){
+				if( key.match( "ZZZ" ) ){
+					localStorage.setItem( key, datas[ key ] );
+				}
+			}
+			location.reload();						
+		};
+		fileReader.onerror = function( e ) {
+			toolLog('FAILED: reading failed');
+		};		
+		fileReader.readAsText( file )
+	}
+}
+/*
+/////////////////////////////////////////////////////////////////////////
+var separateLinePrompt = document.querySelector( "#separateLinePrompt" );
+var separateLinePrompt_isDrag = false;
+var separateLinePrompt_y = false;
+var separateLinePrompt_min = 300;
+var separateLinePrompt_max = 600;
+var separateLinePrompt_target_1_list = [ 
+	document.querySelector( "#editorMainContainer" ),
+	document.querySelector( "#MAIN" )
+]
+var separateLinePrompt_target_2_list = [ 
+	document.querySelector( "#editorNegativeContainer" ),
+	document.querySelector( "#NEGATIVE" )
+]
+
+separateLinePrompt.onmousedown = function( e ){
+
+	separateLinePrompt.style.position = 'absolute';
+	separateLinePrompt.style.zIndex = 1000;
+	moveAt( e.offsetY );
+
+	function moveAt( pageY ){
+		separateLinePrompt.style.top = separateLinePrompt.getBoundingClientRect().top + offsetY + 'px';
+	}
+
+	function onMouseMove( e ){
+		moveAt( e.offsetY );
+	}
+	function dragEnd( e ){
+		separateLinePrompt.removeEventListener( 'mousemove', onMouseMove );
+		separateLinePrompt.removeEventListener( 'mouseup', dragEnd );
+	}
+	separateLinePrompt.addEventListener( 'mousemove', onMouseMove );
+	separateLinePrompt.addEventListener( 'mouseup', dragEnd );
+
+};
+separateLinePrompt.ondragstart = function() {
+	return false;
+};
+*/
+/////////////////////////////////////////////////////////////////////////
+
+changeUILanguage();
+
+
+
+</script>
+
+</body>
+
+</html>
+
+
