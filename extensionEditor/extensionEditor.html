@@ -192,6 +192,10 @@
 				<label data-UIlang="en"><b>Wrap mode.</b></label>
 				<label data-UIlang="ja"><b>右端で折り返す</b></label>
 			</div>
+			<button onclick='clearEditor( "MAIN" );' style="font-size: 70%; width: 50px; height: 25px; margin: 0px 0px 0px 10px;">
+				<label data-UIlang="en"><b>Clear</b></label>
+				<label data-UIlang="ja"><b>消去</b></label>
+			</button>
 		</div>
 		<div id="MAIN" style="height: 500px; min-height: 100px;">
 		</div>
@@ -218,6 +222,10 @@
 				<label data-UIlang="en"><b>Wrap mode.</b></label>
 				<label data-UIlang="ja"><b>右端で折り返す</b></label>
 			</div>
+			<button onclick='clearEditor( "NEGATIVE" );' style="font-size: 70%; width: 50px; height: 25px; margin: 0px 0px 0px 10px;">
+				<label data-UIlang="en"><b>Clear</b></label>
+				<label data-UIlang="ja"><b>消去</b></label>
+			</button>
 		</div>
 		<div id="NEGATIVE" style="height: 200px; min-height: 100px;">
 		</div>
@@ -259,6 +267,10 @@
 				<label data-UIlang="en"><b>Wrap mode.</b></label>
 				<label data-UIlang="ja"><b>右端で折り返す</b></label>
 			</div>
+			<button onclick='clearEditor( "MEMO" );' style="font-size: 70%; width: 50px; height: 25px; margin: 0px 0px 0px 10px;">
+				<label data-UIlang="en"><b>Clear</b></label>
+				<label data-UIlang="ja"><b>消去</b></label>
+			</button>
 		</div>
 		<div id="MEMO" style="height: 600px; min-height: 100px;">
 		</div>
@@ -1303,6 +1315,12 @@ wrapmodeMemo.addEventListener("change",
 	}
 );
 
+////////////////////////////////////////////////////////////////////////
+function clearEditor( editorId ){
+	editor[ editorId ].setValue( "" );
+	editor[ editorId ].gotoLine( 0, 0 );
+	editor[ editorId ].clearSelection();
+}
 
 ////////////////////////////////////////////////////////////////////////
 {
@@ -1401,7 +1419,7 @@ class SelectWorkSlot{
 	constructor( elementId ){
 		this.selectWorkSlot = document.querySelector("#" + elementId );
 		this.slotData = [];
-		for( let i = 0; i < 40; i++ ){
+		for( let i = 0; i < 50; i++ ){
 			let promptmain = localStorage.getItem("ZZZ_SlotData_" + i + "_promptMain" );
 			if( promptmain != null){
 				let promptNegative = localStorage.getItem("ZZZ_SlotData_" + i + "_promptNegative" );
@@ -1497,7 +1515,7 @@ class SelectWorkSlotMemo{
 	constructor( elementId ){
 		this.selectWorkSlotMemo = document.querySelector("#" + elementId );
 		this.SlotDataMemo = [];
-		for( let i = 0; i < 40; i++ ){
+		for( let i = 0; i < 50; i++ ){
 			let prompt = localStorage.getItem("ZZZ_SlotDataMemo_" + i + "_prompt" );
 			if( prompt != null){
 				let lastUpdateTime = localStorage.getItem("ZZZ_SlotDataMemo_" + i + "_lastUpdateTime" );
