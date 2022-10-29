@@ -2,6 +2,7 @@
 
 <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">AUTOMATIC1111</a>向けのプロンプトエディター
 
+# Install
 ★インストール<br>
 <br>
 右上の Code から zipダ ウンロード<br>
@@ -23,13 +24,14 @@ AUTOMATIC1111を再起動<br>
 javascript フォルダの extensionEditor.js と<br>
 extensions フォルダの extensionEdito フォルダを削除<br>
 <br>
+# 機能
 ★セーブ<br>
 <br>
 オートセーブ<br>
 データは各PCのローカルストレージに保存<br>
 <br>
 たまにバックアップファイル保存おすすめ<br>
-現在の作業環境丸ごとファイルに保存<br>
+現在のデータ丸ごとファイルに保存<br>
 <br>
 ★コメント<br>
 <br>
@@ -43,7 +45,7 @@ extensions フォルダの extensionEdito フォルダを削除<br>
 \*/<br>
 <br>
 翻訳文字列<br>
-`あいうえお`<br>
+\`あいうえお\`<br>
 <br>
 コメント部分とバックダッシュで囲まれた翻訳文字列は<br>
 1111に送るときに削除<br>
