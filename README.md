@@ -4,6 +4,11 @@
 ![ScreenShot](https://user-images.githubusercontent.com/109923659/198835290-04b4972e-5164-4e78-89d2-122c7d4f7a73.jpg)
 
 # Install
+<br>
+動作確認は 現状chrome のみ<br>
+Iron では駄目でした<br>
+<br>
+
 ★インストール<br>
 <br>
 右上の Code から zipダ ウンロード<br>
@@ -126,9 +131,6 @@ Ace エディタの便利機能<br>
 何を書いても平気<br>
 自分用テンプレートやよく使うタグのメモにでも<br>
 <br>
-<br>
-<br>
-動作確認は 現状chrome のみ<br>
 <br>
 
 # Credits
