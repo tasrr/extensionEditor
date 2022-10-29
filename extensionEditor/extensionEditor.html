@@ -179,14 +179,19 @@
 		<div style="display: flex; flex-direction: row;">
 			<label data-UIlang="en"><b>MAIN</b></label>
 			<label data-UIlang="ja"><b>メイン</b></label>
-			<button onclick='editor[ "MAIN" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+			<button onclick='editor[ "MAIN" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
 				<label data-UIlang="en"><b>Close All Block</b></label>
 				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
 			</button>
-			<button onclick='editor[ "MAIN" ].session.unfold();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+			<button onclick='editor[ "MAIN" ].session.unfold();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
 				<label data-UIlang="en"><b>Open All Block</b></label>
 				<label data-UIlang="ja"><b>ブロック開ける</b></label>
 			</button>
+			<div style="font-size: 60%; flex-direction: row; margin: 5px 0px 0px 10px;">
+				<input id="wrapmodeMain" type="checkbox" checked>
+				<label data-UIlang="en"><b>Wrap mode.</b></label>
+				<label data-UIlang="ja"><b>右端で折り返す</b></label>
+			</div>
 		</div>
 		<div id="MAIN" style="height: 500px; min-height: 100px;">
 		</div>
@@ -200,14 +205,19 @@
 		<div style="display: flex; flex-direction: row;">
 			<label data-UIlang="en"><b>NEGATIVE</b></label>
 			<label data-UIlang="ja"><b>ネガティブ</b></label>
-			<button onclick='editor[ "NEGATIVE" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+			<button onclick='editor[ "NEGATIVE" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
 				<label data-UIlang="en"><b>Close All Block</b></label>
 				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
 			</button>
-			<button onclick='editor[ "NEGATIVE" ].session.unfold();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+			<button onclick='editor[ "NEGATIVE" ].session.unfold();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
 				<label data-UIlang="en"><b>Open All Block</b></label>
 				<label data-UIlang="ja"><b>ブロック開ける</b></label>
 			</button>
+			<div style="font-size: 60%; flex-direction: row; margin: 5px 0px 0px 10px;">
+				<input id="wrapmodeNegative" type="checkbox" checked>
+				<label data-UIlang="en"><b>Wrap mode.</b></label>
+				<label data-UIlang="ja"><b>右端で折り返す</b></label>
+			</div>
 		</div>
 		<div id="NEGATIVE" style="height: 200px; min-height: 100px;">
 		</div>
@@ -236,14 +246,19 @@
 		<div style="display: flex; flex-direction: row;">
 			<label data-UIlang="en"><b>FREE NOTE</b></label>
 			<label data-UIlang="ja"><b>自由帳</b></label>
-			<button onclick='editor[ "MEMO" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+			<button onclick='editor[ "MEMO" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
 				<label data-UIlang="en"><b>Close All Block</b></label>
 				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
 			</button>
-			<button onclick='editor[ "MEMO" ].session.unfold();' style="font-size: 70%; width: 100px; height: 30px; margin: 0px 0px 0px 5px;">
+			<button onclick='editor[ "MEMO" ].session.unfold();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
 				<label data-UIlang="en"><b>Open All Block</b></label>
 				<label data-UIlang="ja"><b>ブロック開ける</b></label>
 			</button>
+			<div style="font-size: 60%; flex-direction: row; margin: 5px 0px 0px 10px;">
+				<input id="wrapmodeMemo" type="checkbox" checked>
+				<label data-UIlang="en"><b>Wrap mode.</b></label>
+				<label data-UIlang="ja"><b>右端で折り返す</b></label>
+			</div>
 		</div>
 		<div id="MEMO" style="height: 600px; min-height: 100px;">
 		</div>
@@ -673,7 +688,6 @@ function createEditor( divId ){
 	editor[ divId ].setTheme("ace/theme/terminal");
 	editor[ divId ].session.setMode("ace/mode/javascript");
 	editor[ divId ].session.setTabSize( 4 );
-//	editor[ divId ].session.setUseWrapMode( true );
 
 	HoverLink = require("hoverlink").HoverLink
 	editor[ divId ].hoverLink = new HoverLink( editor[ divId ] );
@@ -1258,6 +1272,38 @@ deleteLF.addEventListener("change",
 		localStorage.setItem( "ZZZ_deleteLF_value", deleteLF.checked );
 	}
 );
+////////////////////////////////////////////////////////////////////////
+var wrapmodeMain = document.querySelector( "#wrapmodeMain" );
+wrapmodeMain.checked = ( localStorage.getItem("ZZZ_wrapmodeMain_value") == "false" ? false : true );
+editor[ "MAIN" ].session.setUseWrapMode( wrapmodeMain.checked );
+wrapmodeMain.addEventListener("change",
+	function( e ) {
+		editor[ "MAIN" ].session.setUseWrapMode( wrapmodeMain.checked );
+		localStorage.setItem( "ZZZ_wrapmodeMain_value", wrapmodeMain.checked );
+	}
+);
+
+var wrapmodeNegative = document.querySelector( "#wrapmodeNegative" );
+wrapmodeNegative.checked = ( localStorage.getItem("ZZZ_wrapmodeNegative_value") == "false" ? false : true );
+editor[ "NEGATIVE" ].session.setUseWrapMode( wrapmodeNegative.checked );
+wrapmodeNegative.addEventListener("change",
+	function( e ) {
+		editor[ "NEGATIVE" ].session.setUseWrapMode( wrapmodeNegative.checked );
+		localStorage.setItem( "ZZZ_wrapmodeNegative_value", wrapmodeNegative.checked );
+	}
+);
+
+var wrapmodeMemo = document.querySelector( "#wrapmodeMemo" );
+wrapmodeMemo.checked = ( localStorage.getItem("ZZZ_wrapmodeMemo_value") == "false" ? false : true );
+editor[ "MEMO" ].session.setUseWrapMode( wrapmodeMemo.checked );
+wrapmodeMemo.addEventListener("change",
+	function( e ) {
+		editor[ "MEMO" ].session.setUseWrapMode( wrapmodeMemo.checked );
+		localStorage.setItem( "ZZZ_wrapmodeMemo_value", wrapmodeMemo.checked );
+	}
+);
+
+
 ////////////////////////////////////////////////////////////////////////
 {
 	let selectLanguage = document.querySelector("#selectLanguage");
