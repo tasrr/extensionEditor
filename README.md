@@ -1,6 +1,7 @@
 # extensionEditor
 
 <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">AUTOMATIC1111</a>向けのプロンプトエディター
+![ScreenShot](https://user-images.githubusercontent.com/109923659/198835290-04b4972e-5164-4e78-89d2-122c7d4f7a73.jpg)
 
 # Install
 ★インストール<br>
