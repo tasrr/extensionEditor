@@ -1570,47 +1570,39 @@ editor[ "MEMO" ].session.on('change', function( delta ) {
 		fileReader.readAsText( file )
 	}
 }
-/*
+
 /////////////////////////////////////////////////////////////////////////
 var separateLinePrompt = document.querySelector( "#separateLinePrompt" );
-var separateLinePrompt_isDrag = false;
-var separateLinePrompt_y = false;
-var separateLinePrompt_min = 300;
-var separateLinePrompt_max = 600;
-var separateLinePrompt_target_1_list = [ 
-	document.querySelector( "#editorMainContainer" ),
-	document.querySelector( "#MAIN" )
-]
-var separateLinePrompt_target_2_list = [ 
-	document.querySelector( "#editorNegativeContainer" ),
-	document.querySelector( "#NEGATIVE" )
-]
+document.querySelector( "#separateLinePrompt" ).style.cursor = "n-resize";
 
 separateLinePrompt.onmousedown = function( e ){
 
-	separateLinePrompt.style.position = 'absolute';
-	separateLinePrompt.style.zIndex = 1000;
-	moveAt( e.offsetY );
-
-	function moveAt( pageY ){
-		separateLinePrompt.style.top = separateLinePrompt.getBoundingClientRect().top + offsetY + 'px';
-	}
+	var mouseStartY = e.pageY;
+	var startMainHeight =  document.querySelector( "#MAIN" ).style.height.replace( /px/, "" );
+	var startNegativeHeight =  document.querySelector( "#NEGATIVE" ).style.height.replace( /px/, "" );
 
 	function onMouseMove( e ){
-		moveAt( e.offsetY );
+		let vec = e.pageY - mouseStartY;
+		let newMainHeight = parseInt( startMainHeight ) + vec;
+		let newNegativeHeight = parseInt( startNegativeHeight ) - vec;
+		document.querySelector( "#MAIN" ).style.height = newMainHeight + "px";
+		document.querySelector( "#NEGATIVE" ).style.height = newNegativeHeight + "px";
+
+		editor[ "MAIN" ].resize();
+		editor[ "NEGATIVE" ].resize();
+		
 	}
 	function dragEnd( e ){
-		separateLinePrompt.removeEventListener( 'mousemove', onMouseMove );
-		separateLinePrompt.removeEventListener( 'mouseup', dragEnd );
+		document.removeEventListener( 'mousemove', onMouseMove );
+		document.removeEventListener( 'mouseup', dragEnd );
 	}
-	separateLinePrompt.addEventListener( 'mousemove', onMouseMove );
-	separateLinePrompt.addEventListener( 'mouseup', dragEnd );
-
+	document.addEventListener( 'mousemove', onMouseMove );
+	document.addEventListener( 'mouseup', dragEnd );
 };
 separateLinePrompt.ondragstart = function() {
 	return false;
 };
-*/
+
 /////////////////////////////////////////////////////////////////////////
 
 changeUILanguage();
