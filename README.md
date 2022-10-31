@@ -2,7 +2,11 @@
 
 <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">AUTOMATIC1111</a>向けのプロンプトエディター
 ![ScreenShot](https://user-images.githubusercontent.com/109923659/198835290-04b4972e-5164-4e78-89d2-122c7d4f7a73.jpg)
-
+# 更新
+2022/10/31<br>
+・上部のページ表示を改行までに修正<br>
+・カーソル位置の単語にウェイト0.05加減算のボタン追加<br>
+<br>
 # Install
 <br>
 動作確認は 現状chrome のみ<br>
@@ -100,7 +104,7 @@ tagsEnJa.txt 開いて<br>
 行末に追加<br>
 <br>
 例<br>
-abcde````あいうえお<br>
+abcde\`\`\`\`あいうえお<br>
 <br>
 <br>
 ★ブロック閉じる　開けるボタン<br>
