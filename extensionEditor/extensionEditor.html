@@ -175,24 +175,32 @@
 	</div>
 
 	<!-- Editor MAIN -->
-	<div id="editorMainContainer" style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+	<div id="editorMainContainer" style="display: flex; flex-direction: column;">
 		<div style="display: flex; flex-direction: row;">
 			<label data-UIlang="en"><b>MAIN</b></label>
 			<label data-UIlang="ja"><b>メイン</b></label>
-			<button onclick='editor[ "MAIN" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
-				<label data-UIlang="en"><b>Close All Block</b></label>
-				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
+			<button onclick='addWeight( "MAIN", 0.05 );' style="font-size: 40%; width: 80px; height: 35px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Weight<br>+0.05</b></label>
+				<label data-UIlang="ja"><b>カーソルの<br>単語に+0.05</b></label>
 			</button>
-			<button onclick='editor[ "MAIN" ].session.unfold();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
-				<label data-UIlang="en"><b>Open All Block</b></label>
-				<label data-UIlang="ja"><b>ブロック開ける</b></label>
+			<button onclick='addWeight( "MAIN", -0.05 );' style="font-size: 40%; width: 80px; height: 35px; margin: 0px 0px 0px 2px;">
+				<label data-UIlang="en"><b>Weight<br>-0.05</b></label>
+				<label data-UIlang="ja"><b>カーソルの<br>単語に-0.05</b></label>
 			</button>
-			<div style="font-size: 60%; flex-direction: row; margin: 5px 0px 0px 10px;">
+			<button onclick='editor[ "MAIN" ].session.foldAll();' style="font-size: 40%; width: 60px; height: 35px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Close<br>All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック<br>閉じる</b></label>
+			</button>
+			<button onclick='editor[ "MAIN" ].session.unfold();' style="font-size: 40%; width: 60px; height: 35px; margin: 0px 0px 0px 2px;">
+				<label data-UIlang="en"><b>Open<br>All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック<br>開ける</b></label>
+			</button>
+			<div style="font-size: 50%; flex-direction: row; margin: 5px 0px 0px 4px;">
 				<input id="wrapmodeMain" type="checkbox" checked>
-				<label data-UIlang="en"><b>Wrap mode.</b></label>
-				<label data-UIlang="ja"><b>右端で折り返す</b></label>
+				<label data-UIlang="en"><b>Wrap</b></label>
+				<label data-UIlang="ja"><b>折返し</b></label>
 			</div>
-			<button onclick='clearEditor( "MAIN" );' style="font-size: 70%; width: 50px; height: 25px; margin: 0px 0px 0px 10px;">
+			<button onclick='clearEditor( "MAIN" );' style="font-size: 70%; width: 40px; height: 25px; margin: 5px 0px 0px 3px;">
 				<label data-UIlang="en"><b>Clear</b></label>
 				<label data-UIlang="ja"><b>消去</b></label>
 			</button>
@@ -205,24 +213,32 @@
 	</div>
 
 	<!-- Editor NEGATIVE -->
-	<div id="editorNegativeContainer" style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+	<div id="editorNegativeContainer" style="display: flex; flex-direction: column;">
 		<div style="display: flex; flex-direction: row;">
 			<label data-UIlang="en"><b>NEGATIVE</b></label>
 			<label data-UIlang="ja"><b>ネガティブ</b></label>
-			<button onclick='editor[ "NEGATIVE" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
-				<label data-UIlang="en"><b>Close All Block</b></label>
-				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
+			<button onclick='addWeight( "NEGATIVE", 0.05 );' style="font-size: 40%; width: 80px; height: 35px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Weight<br>+0.05</b></label>
+				<label data-UIlang="ja"><b>カーソルの<br>単語に+0.05</b></label>
 			</button>
-			<button onclick='editor[ "NEGATIVE" ].session.unfold();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
-				<label data-UIlang="en"><b>Open All Block</b></label>
-				<label data-UIlang="ja"><b>ブロック開ける</b></label>
+			<button onclick='addWeight( "NEGATIVE", -0.05 );' style="font-size: 40%; width: 80px; height: 35px; margin: 0px 0px 0px 2px;">
+				<label data-UIlang="en"><b>Weight<br>-0.05</b></label>
+				<label data-UIlang="ja"><b>カーソルの<br>単語に-0.05</b></label>
 			</button>
-			<div style="font-size: 60%; flex-direction: row; margin: 5px 0px 0px 10px;">
+			<button onclick='editor[ "NEGATIVE" ].session.foldAll();' style="font-size: 40%; width: 60px; height: 35px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Close<br>All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック<br>閉じる</b></label>
+			</button>
+			<button onclick='editor[ "NEGATIVE" ].session.unfold();' style="font-size: 40%; width: 60px; height: 35px; margin: 0px 0px 0px 2px;">
+				<label data-UIlang="en"><b>Open<br>All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック<br>開ける</b></label>
+			</button>
+			<div style="font-size: 50%; flex-direction: row; margin: 5px 0px 0px 4px;">
 				<input id="wrapmodeNegative" type="checkbox" checked>
-				<label data-UIlang="en"><b>Wrap mode.</b></label>
-				<label data-UIlang="ja"><b>右端で折り返す</b></label>
+				<label data-UIlang="en"><b>Wrap</b></label>
+				<label data-UIlang="ja"><b>折返し</b></label>
 			</div>
-			<button onclick='clearEditor( "NEGATIVE" );' style="font-size: 70%; width: 50px; height: 25px; margin: 0px 0px 0px 10px;">
+			<button onclick='clearEditor( "NEGATIVE" );' style="font-size: 70%; width: 40px; height: 25px; margin: 5px 0px 0px 3px;">
 				<label data-UIlang="en"><b>Clear</b></label>
 				<label data-UIlang="ja"><b>消去</b></label>
 			</button>
@@ -250,24 +266,32 @@
 	</div>
 
 	<!-- Editor MEMO -->
-	<div style="display: flex; flex-direction: column; margin: 2px 5px 5px 5px;">
+	<div style="display: flex; flex-direction: column;">
 		<div style="display: flex; flex-direction: row;">
 			<label data-UIlang="en"><b>FREE NOTE</b></label>
 			<label data-UIlang="ja"><b>自由帳</b></label>
-			<button onclick='editor[ "MEMO" ].session.foldAll();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
-				<label data-UIlang="en"><b>Close All Block</b></label>
-				<label data-UIlang="ja"><b>ブロック閉じる</b></label>
+			<button onclick='addWeight( "MEMO", 0.05 );' style="font-size: 40%; width: 80px; height: 35px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Weight<br>+0.05</b></label>
+				<label data-UIlang="ja"><b>カーソルの<br>単語に+0.05</b></label>
 			</button>
-			<button onclick='editor[ "MEMO" ].session.unfold();' style="font-size: 70%; width: 100px; height: 25px; margin: 0px 0px 0px 5px;">
-				<label data-UIlang="en"><b>Open All Block</b></label>
-				<label data-UIlang="ja"><b>ブロック開ける</b></label>
+			<button onclick='addWeight( "MEMO", -0.05 );' style="font-size: 40%; width: 80px; height: 35px; margin: 0px 0px 0px 2px;">
+				<label data-UIlang="en"><b>Weight<br>-0.05</b></label>
+				<label data-UIlang="ja"><b>カーソルの<br>単語に-0.05</b></label>
 			</button>
-			<div style="font-size: 60%; flex-direction: row; margin: 5px 0px 0px 10px;">
+			<button onclick='editor[ "MEMO" ].session.foldAll();' style="font-size: 40%; width: 60px; height: 35px; margin: 0px 0px 0px 5px;">
+				<label data-UIlang="en"><b>Close<br>All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック<br>閉じる</b></label>
+			</button>
+			<button onclick='editor[ "MEMO" ].session.unfold();' style="font-size: 40%; width: 60px; height: 35px; margin: 0px 0px 0px 2px;">
+				<label data-UIlang="en"><b>Open<br>All Block</b></label>
+				<label data-UIlang="ja"><b>ブロック<br>開ける</b></label>
+			</button>
+			<div style="font-size: 50%; flex-direction: row; margin: 5px 0px 0px 4px;">
 				<input id="wrapmodeMemo" type="checkbox" checked>
-				<label data-UIlang="en"><b>Wrap mode.</b></label>
-				<label data-UIlang="ja"><b>右端で折り返す</b></label>
+				<label data-UIlang="en"><b>Wrap</b></label>
+				<label data-UIlang="ja"><b>折返し</b></label>
 			</div>
-			<button onclick='clearEditor( "MEMO" );' style="font-size: 70%; width: 50px; height: 25px; margin: 0px 0px 0px 10px;">
+			<button onclick='clearEditor( "MEMO" );' style="font-size: 70%; width: 40px; height: 25px; margin: 5px 0px 0px 3px;">
 				<label data-UIlang="en"><b>Clear</b></label>
 				<label data-UIlang="ja"><b>消去</b></label>
 			</button>
@@ -276,7 +300,7 @@
 		</div>
 		<label id="parseDanbooruText" style="width: 200px; height: 120px; text-align: center; border:4px dashed #333333; margin: 10px 0px 0px 0px;">
 			<label data-UIlang="en"><b>DROP Danbooru text</b><br>danbooru page CTRL+A<br>and<br>Drag & Drop here.</label>
-			<label data-UIlang="ja"><b>Danbooru テキスト</b><br>danbooru のページで<br> CTRL+A 全選択<br>それをここに<br>ドラッグ＆ドロップ</label>
+			<label data-UIlang="ja"><b>Danbooru テキスト</b><br>danbooru のページで<br> CTRL+A 全選択<br>それをここに<br>ドラッグ＆ドロップ<br>自由帳に書出し</label>
 		</label>
 	</div>	<!-- Editor MEMO -->
 
@@ -1321,6 +1345,88 @@ function clearEditor( editorId ){
 	editor[ editorId ].gotoLine( 0, 0 );
 	editor[ editorId ].clearSelection();
 }
+////////////////////////////////////////////////////////////////////////
+function addWeight( editorId, value ){
+	let curPos = editor[ editorId ].selection.getCursor();
+//console.log( curPos );
+	let line = editor[ editorId ].session.getLine( curPos.row );
+	line = line.replace(/\r\n|\r/g, "\n");
+//console.log( line );
+
+	let separater = [ '\n', ',', '(', ')', '`', ':', '{', '}', '[', ']','<', '>', '|', '/'];
+	let len = line.length;
+	
+	let wordStartPos = curPos.column;
+	for( let i = curPos.column; i >= 0; i-- ){
+		let c = line.charAt( i );
+		if( c == ' ' || c == '\t' ){
+			continue;
+		} else if( separater.indexOf( c ) == -1 ){
+			wordStartPos = i;
+		} else {
+			break;
+		}
+	}
+	
+	let wordLastPos = curPos.column;
+	for( let i = curPos.column; i < len; i++ ){
+		let c = line.charAt( i );
+		if( c == ' ' || c == '\t' ){
+			continue;
+		} else if( separater.indexOf( c ) == -1 ){
+			wordLastPos = i;
+		} else {
+			break;
+		}
+	}
+	
+	let before = line.substring( 0, wordStartPos );
+	let word = line.substring( wordStartPos, wordLastPos + 1 );
+	let after = line.substring( wordLastPos + 1, line.length );
+
+	word = word.trim();
+	if( separater.indexOf( word ) != -1 ){
+		word = "";
+	}
+	if( word.length == 0 ){
+//console.log( "NO WORD" );
+		return;
+	}
+//console.log( "before: " + before );
+//console.log( "word: " + word );
+//console.log( "after: " + after );
+	
+	let weight = "";
+	if( after.match( /^\s*\:\s*(-*\d+\.*\d*)\s*\)?(.*)$/ ) ){
+		weight = RegExp.$1;
+		after = RegExp.$2;
+//console.log( "weight: " + weight );
+//console.log( "new after: " + after );
+	}
+	
+	if( weight.length == 0 ){
+		weight = 1.0 + value;
+		weight = weight.toFixed( 2 );
+		word = "(" + word + ":" + weight + ")";
+	} else {
+		if( before.match( /\(\s*$/ ) == -1 ){
+			word = "(" + word;
+		}
+		weight = Number( weight ) + value;
+		weight = weight.toFixed( 2 );
+//console.log( "new weight: " + weight );
+		word = word + ":" + weight + ")";
+	}
+	let newLine = before + word + after;
+//console.log( "newLine: " + newLine );
+
+
+	editor[ editorId ].session.replace( new ace.Range( curPos.row, 0, curPos.row, line.length ), newLine );
+	editor[ editorId ].gotoLine( curPos.row + 1, curPos.column );
+	editor[ editorId ].clearSelection();
+	editor[ editorId ].focus();
+
+}
 
 ////////////////////////////////////////////////////////////////////////
 {
@@ -1390,12 +1496,12 @@ class SlotData{
 		this.promptMain = promptmain;
 		this.promptNegative = promptNegative;
 		this.lastUpdateTime = lastUpdateTime;
-		this.viewText = this.dataidx + " : " + this.promptMain.substring( 0, 20 );
+		this.viewText = this.dataidx + " : " + this.promptMain.substring( 0, 20 ).replace(/\n+.*$/, "" );
 		localStorage.setItem("ZZZ_SlotData_" + this.dataidx + "_promptMain", this.promptMain );
 	}
 
 	updateViewText(){
-		this.viewText = this.dataidx + " : " + this.promptMain.substring( 0, 20 );
+		this.viewText = this.dataidx + " : " + this.promptMain.substring( 0, 20 ).replace(/\n+.*$/, "" );
 	}
 	getViewText(){
 		this.updateViewText();
@@ -1491,12 +1597,12 @@ class SlotDataMemo{
 		this.dataidx = dataidx;
 		this.prompt = prompt;
 		this.lastUpdateTime = lastUpdateTime;
-		this.viewText = this.dataidx + " : " + this.prompt.substring( 0, 20 );
+		this.viewText = this.dataidx + " : " + this.prompt.substring( 0, 20 ).replace( /\n+.*$/, "" );
 		localStorage.setItem("ZZZ_SlotDataMemo_" + this.dataidx + "_prompt", this.prompt );
 	}
 
 	updateViewText(){
-		this.viewText = this.dataidx + " : " + this.prompt.substring( 0, 20 );
+		this.viewText = this.dataidx + " : " + this.prompt.substring( 0, 20 ).replace(/\n+.*$/, "" );
 	}
 	getViewText(){
 		this.updateViewText();
