@@ -1,7 +1,7 @@
 # extensionEditor
 
 <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">AUTOMATIC1111</a>向けのプロンプトエディター
-![ScreenShot](https://user-images.githubusercontent.com/109923659/198835290-04b4972e-5164-4e78-89d2-122c7d4f7a73.jpg)
+![ScreenShot](https://user-images.githubusercontent.com/109923659/199021913-130910f6-da67-4590-8ebe-ed6661b77b4b.jpg)
 # 更新
 2022/10/31<br>
 ・上部のページ表示を改行までに修正<br>
