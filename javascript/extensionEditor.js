@@ -13,7 +13,7 @@ onUiUpdate(
 			btn.appendChild( document.createTextNode( "OPEN ExtensionEditor" ) );
 			btn.disabled = true;
 			btn.addEventListener( "click", function() {
-				window.open( "file/extensions/extensionEditor/extensionEditor.html", null, "popup,top=100,left=100" );
+				window.open( "file/extensions/extensionEditor/extensionEditor/extensionEditor.html", null, "popup,top=100,left=100" );
 			});
 			document.body.insertBefore( btn, document.body.firstChild );
 
