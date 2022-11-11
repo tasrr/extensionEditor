@@ -21,7 +21,10 @@ extensionEditor.js ファイルを<br>
 stable-diffusion-webui\javascript\ フォルダに移動<br>
 <br>
 extensionEditor フォルダを<br>
-stable-diffusion-webui\extensions\ フォルダに移動<br>
+stable-diffusion-webui\extensions\extensionEditor\ フォルダに移動<br>
+※ extensionEditor が無い場合手動で作ってください<br>
+stable-diffusion-webui\extensions\extensionEditor\extensionEditor\中身 の形になります<br>
+
 <br>
 AUTOMATIC1111を再起動<br>
 左上の OPEN ExtensionEditor ボタン押下で開始<br>
