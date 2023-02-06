@@ -3,6 +3,9 @@
 <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">AUTOMATIC1111</a>向けのプロンプトエディター
 ![ScreenShot](https://user-images.githubusercontent.com/109923659/199021913-130910f6-da67-4590-8ebe-ed6661b77b4b.jpg)
 # 更新
+2023/02/07<br>
+・最新版の1111で起動しなかったので修正
+
 2022/10/31<br>
 ・上部のページ表示を改行までに修正<br>
 ・カーソル位置の単語にウェイト0.05加減算のボタン追加<br>
